@@ -149,14 +149,9 @@ bool updateReach(ll skip[],
         City cityUsedToRefuel = pq.top();
         temp.push_back(cityUsedToRefuel);
         pq.pop();
-        // if (skip[cityUsedToRefuel.id] == 0 || cityUsedToRefuel.id == initialCityId) {
-        //     // pq.push(cityUsedToRefuel);
-        //     return false;
-        // }
         if( aCity.pos < cityUsedToRefuel.pos + m) {
             reach = cityUsedToRefuel.pos + m;
             cost = cityUsedToRefuel.cost;
-            // pq.push(cityUsedToRefuel);
             break;
         }
     }
@@ -164,7 +159,6 @@ bool updateReach(ll skip[],
     for (ll i = 0; i < temp.size(); i++) {
         pq.push(temp[i]);
     }
-    //if (!pq.empty() && skip[city1.id] && pos - skip[city1.id] - 1 > aCity.pos - pos) {
     
    return !pqEmpty;     
 }
@@ -190,11 +184,9 @@ void addOptions( vector<vector<ll> >& graph,
             pq.push( City(aCity.id, cost + costs[aCity.id], actualPos(aCity.pos, pos), reach ) );
         }
         if(aCity.pos == reach && aCity.pos + 1 < pos + m) {
-            if(_debug) cout << "Prev cost, reach " << cost << " " << reach << endl;
             if( !updateReach(skip, pq, cost, reach, aCity, line[pos]) ) {
                 continue;
             }
-            if(_debug) cout << "New cost, reach " << cost << " " << reach << endl;
         }
         
         
